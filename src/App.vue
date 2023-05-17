@@ -65,19 +65,19 @@
 </template>
 
 <script>
-// import axios from "axios";
-import CarrierList from './assets/Company.json'
-import Tracking from './assets/Tracking.json'
+import axios from "axios";
+// import CarrierList from './assets/Company.json'
+// import Tracking from './assets/Tracking.json'
 export default {
   name: 'App',
   data() {
     return {
       isBtn: 1,
-      t_key: "WjnqPOL69jaWL8Ah5aeTlg",
+      t_key: "FILRXd1FXFwIt1wduoTx7g",
       t_code: "04",
       t_invoice: "",
       // 테스트코드 363804378896
-      Carriers: CarrierList,
+      Carriers: [],
       isShow: false,
       Trackings: [],
       errorMsg: '',
@@ -109,24 +109,24 @@ export default {
         return
       }
       this.errorMsg = '';
-      this.Trackings = Tracking;
-      // axios.get("https://info.sweettracker.co.kr/api/v1/trackingInfo",{
-      //   params:{
-      //     t_code: this.t_code,
-      //     t_invoice: this.t_invoice,
-      //     t_key: this.t_key
-      //   }
-      // }).then((res)=>{
-      //   console.log(res);
-      //   if(res.data.code === '104'){
-      //     this.errorMsg = res.data.msg
-      //     }else{
-      //     this.Trackings = res.data
-      //     this.errorMsg = ''
-      //   }
-      // }).catch((error)=>{
-      //   console.log(error)
-      // })
+      // this.Trackings = Tracking;
+      axios.get("https://info.sweettracker.co.kr/api/v1/trackingInfo",{
+        params:{
+          t_code: this.t_code,
+          t_invoice: this.t_invoice,
+          t_key: this.t_key
+        }
+      }).then((res)=>{
+        console.log(res);
+        if(res.data.code === '104'){
+          this.errorMsg = res.data.msg
+          }else{
+          this.Trackings = res.data
+          this.errorMsg = ''
+        }
+      }).catch((error)=>{
+        console.log(error)
+      })
     },
     ResetColor(){
       document.querySelector('.bgcolor').style.backgroundColor = ''
@@ -154,12 +154,12 @@ export default {
     }
 },
   created() {
-    // axios.get("https://info.sweettracker.co.kr/api/v1/companylist?t_key=WjnqPOL69jaWL8Ah5aeTlg").then((res)=>{
-    //   this.Carriers = res.data.Company;
-    //   console.log(this.Carriers)
-    // }).catch((error)=>{
-    //   console.log(error)
-    // })
+    axios.get("https://info.sweettracker.co.kr/api/v1/companylist?t_key=FILRXd1FXFwIt1wduoTx7g").then((res)=>{
+      this.Carriers = res.data.Company;
+      console.log(this.Carriers)
+    }).catch((error)=>{
+      console.log(error)
+    })
     // 보통 이렇게 불러오지만 오늘은 local로 돌릴거다!
   },
   mounted() {
