@@ -73,7 +73,7 @@ export default {
   data() {
     return {
       isBtn: 1,
-      t_key: "FILRXd1FXFwIt1wduoTx7g",
+      t_key: "EOlS6CKEUC9772vgzLIpMg",
       t_code: "04",
       t_invoice: "",
       // 테스트코드 363804378896
@@ -154,7 +154,7 @@ export default {
     }
 },
   created() {
-    axios.get("https://info.sweettracker.co.kr/api/v1/companylist?t_key=FILRXd1FXFwIt1wduoTx7g").then((res)=>{
+    axios.get("https://info.sweettracker.co.kr/api/v1/companylist?t_key=EOlS6CKEUC9772vgzLIpMg").then((res)=>{
       this.Carriers = res.data.Company;
       console.log(this.Carriers)
     }).catch((error)=>{
